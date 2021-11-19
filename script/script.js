@@ -1,3 +1,20 @@
+let selectedNumber  = '';
+const result = document.querySelector(".display");
+const numbers = document.querySelectorAll(".number")
+const operators = document.querySelectorAll(".operator");
+
+numbers.forEach((numb)=>{
+    numb.addEventListener('click',()=>{
+        selectedNumber *= numb.textContent;
+    })
+})
+
+operators.forEach((operator)=>{
+    operator.addEventListener('click',()=>{
+        let op = operator.textContent;        
+    })
+})
+
 function add(a,b){
     return a + b;
 }
