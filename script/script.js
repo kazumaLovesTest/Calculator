@@ -12,7 +12,7 @@ display.textContent = ''
 numbers.forEach((numb)=>{
     numb.addEventListener('click',()=>{
         selectedNumber += numb.textContent;
-        updateDisplay(selectedNumber);
+        updateDisplay(numb.textContent);
     })
 })
 
@@ -31,10 +31,17 @@ function updateNumbers(e){
             firstOperand = operate(op,Number(firstOperand),Number(secondOperand));
             display.textContent =  firstOperand;
         }
+        if (e.target.textContent !== "="){
+            op = e.target.textContent;
+            updateDisplay(op); 
+            selectedNumber = ''; 
+        }
 
-        selectedNumber = '';  
-        op = e.target.textContent;
-        updateDisplay(op); 
+        else{
+            selectedNumber = firstOperand;
+            firstOperand = '';
+        }
+            
     }
      
 }
