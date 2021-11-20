@@ -1,19 +1,47 @@
-let selectedNumber  = '';
-const result = document.querySelector(".display");
+const display = document.querySelector(".display");
 const numbers = document.querySelectorAll(".number")
 const operators = document.querySelectorAll(".operator");
 
+let selectedNumber  = '';
+let firstOperand = '';
+let secondOperand = '';
+let op = '';
+display.textContent = ''
+
+
 numbers.forEach((numb)=>{
     numb.addEventListener('click',()=>{
-        selectedNumber *= numb.textContent;
+        selectedNumber += numb.textContent;
+        updateDisplay(selectedNumber);
     })
 })
 
 operators.forEach((operator)=>{
-    operator.addEventListener('click',()=>{
-        let op = operator.textContent;        
-    })
+    operator.addEventListener('click',updateNumbers)
 })
+
+function updateNumbers(e){
+    if (selectedNumber !== ''){
+
+        if (firstOperand === '')
+                firstOperand = selectedNumber;
+                
+        else {
+            secondOperand = selectedNumber;
+            firstOperand = operate(op,Number(firstOperand),Number(secondOperand));
+            display.textContent =  firstOperand;
+        }
+
+        selectedNumber = '';  
+        op = e.target.textContent;
+        updateDisplay(op); 
+    }
+     
+}
+
+function updateDisplay(toBeDisplayed){
+    display.textContent += toBeDisplayed;
+}
 
 function add(a,b){
     return a + b;
