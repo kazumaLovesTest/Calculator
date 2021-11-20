@@ -1,13 +1,15 @@
 const display = document.querySelector(".display");
 const numbers = document.querySelectorAll(".number")
 const operators = document.querySelectorAll(".operator");
+const clear = document.querySelector(".clear");
 
 let selectedNumber  = '';
 let firstOperand = '';
 let secondOperand = '';
 let op = '';
-display.textContent = ''
+display.textContent = '';
 
+clear.addEventListener('click',clearAll);
 
 numbers.forEach((numb)=>{
     numb.addEventListener('click',()=>{
@@ -48,6 +50,14 @@ function updateNumbers(e){
 
 function updateDisplay(toBeDisplayed){
     display.textContent += toBeDisplayed;
+}
+
+function clearAll(){
+    selectedNumber  = '';
+    firstOperand = '';
+    secondOperand = '';
+    op = '';
+    display.textContent = '';
 }
 
 function add(a,b){
