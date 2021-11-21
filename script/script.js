@@ -1,23 +1,19 @@
 const display = document.querySelector(".display");
 const numbers = document.querySelectorAll(".number")
 const operators = document.querySelectorAll(".operator");
-const clear = document.querySelector(".clear");
+const clearButton = document.querySelector(".clear");
+const deleteButton = document.querySelector(".delete");
 
-let selectedNumber  = '';
+let selectedNumber  = [];
 let firstOperand = '';
 let secondOperand = '';
 let op = '';
-display.textContent = '';
+display.textContent = [''].join('');
 
-clear.addEventListener('click',clearAll);
-
-numbers.forEach((numb)=>{
-    numb.addEventListener('click',getNumber
-)})
-
-operators.forEach((operator)=>{
-    operator.addEventListener('click',updateNumbers)
-})
+deleteButton.addEventListener('click',deleteLastElement);
+clearButton.addEventListener('click',clearAll);
+numbers.forEach( (numb) => {numb.addEventListener('click',getNumber)})
+operators.forEach( (operator) => {operator.addEventListener('click',updateNumbers)})
 
 function getNumber(e){
     if (firstOperand === Infinity || isNaN(firstOperand))
@@ -28,22 +24,22 @@ function getNumber(e){
             return;
     }
 
-    selectedNumber += e.target.textContent;
+    selectedNumber.push(e.target.textContent);
     updateDisplay(e.target.textContent);
 }
 
 function updateNumbers(e){
-    if (selectedNumber !== ''){
+    if (selectedNumber.length > 0){
 
         if (firstOperand === '')
-                firstOperand = selectedNumber;
+                firstOperand = selectedNumber.join('');
                 
         else {
-            secondOperand = selectedNumber;
-            firstOperand =getSolution();
+            secondOperand = selectedNumber.join('');
+            firstOperand = getSolution();
             display.textContent =  firstOperand;
             if (firstOperand === Infinity || isNaN(firstOperand)){
-                selectedNumber = '';
+                selectedNumber = [];
                 return;
             }
             
@@ -51,24 +47,42 @@ function updateNumbers(e){
         if (e.target.textContent !== "="){
             op = e.target.textContent;
             updateDisplay(op); 
-            selectedNumber = ''; 
+            selectedNumber = []; 
         }
 
         else{
-            selectedNumber = firstOperand.toString();
+            selectedNumber = Array.from(firstOperand.toString());
             firstOperand = '';
         }
             
     }
      
 }
+function deleteLastElement(){
+    if (firstOperand === Infinity || isNaN(firstOperand)){
+        clearAll();
+        return;
+    }
+        
+    let text = Array.from(display.textContent);
+    let deleted = text.pop();
+    if (!isNaN(deleted) || deleted === '.'){
+        selectedNumber.pop();
+    }
+    else{
+        selectedNumber = Array.from(firstOperand);
+        firstOperand = '';
+        op = '';
+    }
+    display.textContent = text.join('')
 
+}
 function updateDisplay(toBeDisplayed){
-    display.textContent += toBeDisplayed;
+        display.textContent += toBeDisplayed;
 }
 
 function clearAll(){
-    selectedNumber  = '';
+    selectedNumber  = [];
     firstOperand = '';
     secondOperand = '';
     op = '';
