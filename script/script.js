@@ -22,6 +22,12 @@ operators.forEach((operator)=>{
 function getNumber(e){
     if (firstOperand === Infinity || isNaN(firstOperand))
         clearAll();
+
+    if (firstOperand === ''){
+        if (e.target.textContent === '.' && selectedNumber.includes('.'))
+            return;
+    }
+
     selectedNumber += e.target.textContent;
     updateDisplay(e.target.textContent);
 }
@@ -36,7 +42,6 @@ function updateNumbers(e){
             secondOperand = selectedNumber;
             firstOperand =getSolution();
             display.textContent =  firstOperand;
-            
             if (firstOperand === Infinity || isNaN(firstOperand)){
                 selectedNumber = '';
                 return;
@@ -50,7 +55,7 @@ function updateNumbers(e){
         }
 
         else{
-            selectedNumber = firstOperand;
+            selectedNumber = firstOperand.toString();
             firstOperand = '';
         }
             
@@ -73,7 +78,7 @@ function clearAll(){
 function getSolution(){
     let sum = operate(op,Number(firstOperand),Number(secondOperand));
         if (sum.toString().length > 10)
-            return Math.round(sum);
+            return Math.round(sum * 10) / 10;
     return sum;
 }
 
