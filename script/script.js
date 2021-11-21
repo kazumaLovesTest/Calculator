@@ -13,6 +13,8 @@ clear.addEventListener('click',clearAll);
 
 numbers.forEach((numb)=>{
     numb.addEventListener('click',()=>{
+        if (firstOperand === Infinity || isNaN(firstOperand))
+            clearAll();
         selectedNumber += numb.textContent;
         updateDisplay(numb.textContent);
     })
@@ -32,6 +34,11 @@ function updateNumbers(e){
             secondOperand = selectedNumber;
             firstOperand = operate(op,Number(firstOperand),Number(secondOperand));
             display.textContent =  firstOperand;
+            if (firstOperand === Infinity || isNaN(firstOperand)){
+                selectedNumber = '';
+                return;
+            }
+            
         }
         if (e.target.textContent !== "="){
             op = e.target.textContent;
