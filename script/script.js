@@ -12,17 +12,19 @@ display.textContent = '';
 clear.addEventListener('click',clearAll);
 
 numbers.forEach((numb)=>{
-    numb.addEventListener('click',()=>{
-        if (firstOperand === Infinity || isNaN(firstOperand))
-            clearAll();
-        selectedNumber += numb.textContent;
-        updateDisplay(numb.textContent);
-    })
-})
+    numb.addEventListener('click',getNumber
+)})
 
 operators.forEach((operator)=>{
     operator.addEventListener('click',updateNumbers)
 })
+
+function getNumber(e){
+    if (firstOperand === Infinity || isNaN(firstOperand))
+        clearAll();
+    selectedNumber += e.target.textContent;
+    updateDisplay(e.target.textContent);
+}
 
 function updateNumbers(e){
     if (selectedNumber !== ''){
@@ -32,8 +34,9 @@ function updateNumbers(e){
                 
         else {
             secondOperand = selectedNumber;
-            firstOperand = operate(op,Number(firstOperand),Number(secondOperand));
+            firstOperand =getSolution();
             display.textContent =  firstOperand;
+            
             if (firstOperand === Infinity || isNaN(firstOperand)){
                 selectedNumber = '';
                 return;
@@ -65,6 +68,13 @@ function clearAll(){
     secondOperand = '';
     op = '';
     display.textContent = '';
+}
+
+function getSolution(){
+    let sum = operate(op,Number(firstOperand),Number(secondOperand));
+        if (sum.toString().length > 10)
+            return Math.round(sum);
+    return sum;
 }
 
 function add(a,b){
