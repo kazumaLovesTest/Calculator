@@ -16,6 +16,10 @@ numbers.forEach( (numb) => {numb.addEventListener('click',getNumber)})
 operators.forEach( (operator) => {operator.addEventListener('click',updateNumbers)})
 
 function getNumber(e){
+    if(selectedNumber.length == 10){
+        alert('number too big');
+        return;
+    }
     if (firstOperand === Infinity || isNaN(firstOperand))
         clearAll();
 
@@ -58,6 +62,7 @@ function updateNumbers(e){
     }
      
 }
+
 function deleteLastElement(){
     if (firstOperand === Infinity || isNaN(firstOperand)){
         clearAll();
@@ -77,6 +82,7 @@ function deleteLastElement(){
     display.textContent = text.join('')
 
 }
+
 function updateDisplay(toBeDisplayed){
         display.textContent += toBeDisplayed;
 }

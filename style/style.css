@@ -1,0 +1,43 @@
+html{
+    box-sizing: border-box;
+}
+*,*:before,*:after{
+    box-sizing: inherit;
+}
+.clear, .delete, .numbers, .operator, .display{
+    display: inline-block;
+}
+.container{
+    text-align: center;
+    margin: 100px auto;
+    width: 350px;
+}
+.display{
+    
+    width: inherit;
+    border: 1px solid;
+    width: 325px;
+    margin-bottom: 10px;
+    height: 75px;
+    font-size: 30px;
+    text-align: end;
+    text-overflow: calc(+);
+}
+.clear, .delete{
+    width: 150px;
+    height: 50px;
+    /* display: inline-block; */
+    /* margin: 10px 0px; */
+}
+
+.clear{
+    margin-right: 20px;
+}
+
+.number, .operator{
+    width: 78px;
+    height: 50px;
+}
+.numbAndOperators{
+    margin-top: 10px;
+}
